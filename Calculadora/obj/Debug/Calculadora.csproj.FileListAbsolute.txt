@@ -1,0 +1,8 @@
+C:\Users\marcel.rmpenha\source\repos\Calculadora\Calculadora\obj\Debug\Calculadora.csproj.AssemblyReference.cache
+C:\Users\marcel.rmpenha\source\repos\Calculadora\Calculadora\obj\Debug\Calculadora.csproj.SuggestedBindingRedirects.cache
+C:\Users\marcel.rmpenha\source\repos\Calculadora\Calculadora\obj\Debug\Calculadora.csproj.CoreCompileInputs.cache
+C:\Users\marcel.rmpenha\source\repos\Calculadora\Calculadora\bin\Debug\Calculadora.exe.config
+C:\Users\marcel.rmpenha\source\repos\Calculadora\Calculadora\bin\Debug\Calculadora.exe
+C:\Users\marcel.rmpenha\source\repos\Calculadora\Calculadora\bin\Debug\Calculadora.pdb
+C:\Users\marcel.rmpenha\source\repos\Calculadora\Calculadora\obj\Debug\Calculadora.exe
+C:\Users\marcel.rmpenha\source\repos\Calculadora\Calculadora\obj\Debug\Calculadora.pdb
