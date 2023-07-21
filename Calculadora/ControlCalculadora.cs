@@ -28,15 +28,7 @@ namespace Calculadora
             this.calculadora.GetsetNum2 = Convert.ToDouble(Console.ReadLine());
         }//Fim do método coletar
 
-        //Método Coleta
-        public void Coleta()
-        {
-            Console.WriteLine("Informe um número");
-            this.calculadora.GetsetNumConv = Convert.ToInt32(Console.ReadLine());
-
-        }//Fim do método coleta
-
-        //Método Coletar
+        //Método Coletar Bhaskara
         public void ColetaBhaskara()
         {
             Console.WriteLine("Informe o A");
@@ -122,26 +114,45 @@ namespace Calculadora
                         Console.WriteLine(this.calculadora.TabuadaNum1());
                         break;
                     case 8:
-                        Coleta();
-                        Console.WriteLine("Raiz: " + this.calculadora.Raiz());
+                        Console.WriteLine("Informe um número Binário: ");
+                        string valor = Console.ReadLine();
+                        int resultado = Convert.ToInt32(ModelCalculadora.BinarioParaDecimal(valor));
+                        Console.WriteLine($" O número binário: {valor} é igual a {resultado} em Decimal");
+                        Console.WriteLine();
                         break;
                     case 9:
-                        Coleta();
-                        Console.WriteLine("Raiz: " + this.calculadora.Raiz());
+                        Console.WriteLine("Informe o número Decimal a converter: ");
+                        string valor1 = Console.ReadLine();
+                        string resultado1 = ModelCalculadora.DecimalParaBinario(valor1);
+                        Console.WriteLine($" O número Decimal: {valor1} é igual a {resultado1} em Binário");
+                        Console.WriteLine();
                         break;
                     case 10:
-                        Coleta();
-                        Console.WriteLine("Raiz: " + this.calculadora.Raiz());
+                        Console.WriteLine("Informe o número Decimal a converter: ");
+                        string valor2 = Console.ReadLine();
+                        string resultado2 = ModelCalculadora.DecimalParaHexadecimal(valor2);
+                        Console.WriteLine($" O número Decimal: {valor2} é igual a {resultado2} em Hexadecimal");
+                        Console.WriteLine();
                         break;
                     case 11:
-                        Coleta();
-                        Console.WriteLine("Raiz: " + this.calculadora.Raiz());
+                        Console.WriteLine("Informe o número Hexadecimal a converter: ");
+                        string valor3 = Console.ReadLine();
+                        int resultado3 = Convert.ToInt32(ModelCalculadora.HexadecimalParaDecimal(valor3));
+                        Console.WriteLine($" O número Hexadecimal: {valor3} é igual a {resultado3} em Decimal");
+                        Console.WriteLine();
                         break;
                     case 12:
                         ColetaBhaskara();
-                        Console.WriteLine("Delta: " + this.calculadora.Delta());
-                        Console.WriteLine("X1: " + this.calculadora.X1());
-                        Console.WriteLine("X2: " + this.calculadora.X2());
+                        if (this.calculadora.X1() == -1)
+                        {
+                            Console.WriteLine("Delta Negativo!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Delta: " + this.calculadora.Delta());
+                            Console.WriteLine("X1: " + this.calculadora.X1());
+                            Console.WriteLine("X2: " + this.calculadora.X2());
+                        }
                         break;
                 }//Fim do switch
             } while (opcao != 0);//fim do Do...While

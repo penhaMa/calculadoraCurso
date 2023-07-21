@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +12,6 @@ namespace Calculadora
         //Declaração de variáveis
         private double num1;
         private double num2;
-        private int numConv;
         private double A;
         private double B;
         private double C;
@@ -22,7 +22,6 @@ namespace Calculadora
         {
             GetsetNum1 = 0;
             GetsetNum2 = 0;
-            GetsetNumConv = 0;
             GetsetA = 0;
             GetsetB = 0;
             GetsetC = 0;
@@ -40,12 +39,6 @@ namespace Calculadora
         {
             get { return this.num2; }
             set { this.num2 = value; }
-        }//Fim do GetSetNum2
-
-        public int GetsetNumConv
-        {
-            get { return this.numConv; }
-            set { this.numConv = value; }
         }//Fim do GetSetNum2
 
         public double GetsetA
@@ -138,60 +131,127 @@ namespace Calculadora
         //Método X1
         public double X1()
         {
-            return (- GetsetB) + Math.Sqrt(Delta()) / 2 * GetsetA;
+            if (Delta() <= 0)
+            {
+                return -1;
+            }
+            else
+            {
+                return (-GetsetB + Math.Sqrt(Delta())) / (2 * GetsetA);
+            }
         }//Fim do método X1
 
-        //Método X1
+        //Método X2
         public double X2()
         {
-            return (- GetsetB) - Math.Sqrt(Delta()) / 2 * GetsetA;
+            return (-GetsetB - Math.Sqrt(Delta())) / (2 * GetsetA);
         }//Fim do método X2
 
-        public string InverterString(string str)
+        //Método binario para decimal
+        public static int BinarioParaDecimal(string numeroBinario)
         {
-            int tamanho = str.Length;
-
-            char[] caracteres = new char[tamanho];
-
-            for (int i = 0; i < tamanho; i++)
-            {
-                caracteres[i] = str[tamanho - 1 - i];
-            }
-
-            return new string(caracteres);
-            
-        }
-        public int BinarioParaDecimal(string GetsetNumConv)
-        {
-
             int expoente = 0;
-
             int numero;
-
             int soma = 0;
-
-            string numeroInvertido = InverterString(GetsetNumConv);
-
+            string numeroInvertido = ReverteString(numeroBinario);
             for (int i = 0; i < numeroInvertido.Length; i++)
             {
-
-                //pega o dígito por dígito do número digitado
-
                 numero = Convert.ToInt32(numeroInvertido.Substring(i, 1));
-
-                //multiplica o dígito por 2 elevado ao expoente, e armazena o resultado em soma
-
                 soma += numero * (int)Math.Pow(2, expoente);
-
-                // incrementa o expoente
-
                 expoente++;
+            }
+            return soma;
+        }//fim do método binario para decimal
 
+        //Método decimal para binario
+        public static string DecimalParaBinario(string numeroDecimal)
+        {
+            string valor1 = "";
+            int dividendo = Convert.ToInt32(numeroDecimal);
+            if (dividendo == 0 || dividendo == 1)
+            {
+                return Convert.ToString(dividendo);
+            }
+            else
+            {
+                while (dividendo > 0)
+                {
+                    valor1 += Convert.ToString(dividendo % 2);
+                    dividendo = dividendo / 2;
+                }
+                return ReverteString(valor1);
+            }
+        }//fim do método decimal para binario
+
+        //Método decimal para hexadecimal
+        public static string DecimalParaHexadecimal(string numeroDecimal)
+        {
+            string valor2 = "";
+            int dividendo = Convert.ToInt32(numeroDecimal);
+            if (dividendo == 0 || dividendo == 1)
+            {
+                return Convert.ToString(dividendo);
+            }
+            else
+            {
+                while (dividendo > 0)
+                {
+                    valor2 += Convert.ToString(dividendo % 16);
+                    dividendo = dividendo / 16;
+                }
+                return ReverteString(valor2);
             }
 
-            return soma;
+            int op = 0;
+            switch (op)
+            {
+                case 1:
+                valor2 = "10";
+                    break;
+                   
+            }
+        }//fim do método decimal para hexadecimal
 
-        }
+        //Método hexadecimal para decimal
+        public static long HexadecimalParaDecimal(string numeroHexadecimal)
+        {
+            long resultado = 0;
+            int comprimento = numeroHexadecimal.Length;
+
+            for (int i = 0; i < comprimento; i++)
+            {
+                char caractere = numeroHexadecimal[i];
+                int valor;
+
+                if (caractere >= '0' && caractere <= '9')
+                {
+                    valor = caractere - '0';
+                }
+                else if (caractere >= 'A' && caractere <= 'F')
+                {
+                    valor = caractere - 'A' + 10;
+                }
+                else if (caractere >= 'a' && caractere <= 'f')
+                {
+                    valor = caractere - 'a' + 10;
+                }
+                else
+                {
+                    throw new ArgumentException("O valor hexadecimal contém caracteres inválidos.");
+                }
+
+                int expoente = comprimento - i - 1;
+                resultado += valor * (1L << (expoente * 4));
+            }
+
+            return resultado;
+        }//fim do método hexadecimal para decimal
+
+        //Método revert 
+        public static string ReverteString(string str)
+        {
+            return new string(str.Reverse().ToArray());
+        }//fim do método reverte string
 
     }// Fim da classe
 }// Fim do projeto
